@@ -158,7 +158,7 @@ void story(int charSelect)
         
         cout << "\nWill you move towards the light?\n1. Yes\n2. No\n";
 
-                                    //-------------------------CURRENT ISSUE---------------------------//
+                                    //-------------------------CURRENT ISSUE--------------------------//
         char userResponse;
         while(cin >> userResponse){
         if(userResponse != '1' && userResponse != '2')

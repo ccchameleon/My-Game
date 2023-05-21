@@ -19,13 +19,13 @@ class CharacterClass{
         int strength = 0;  //buffness for knights
         int MP = 0;   //magic points for mages
         int arrows = 0; //arrows for archers
-        map<string,string> itemMap;
+        map<string,string> inventory;
 
     public:
         string name;    //name of adventurer
         string vials;   //key for vials in map
         string vialContents;    //value for vials in map
-        int _response;
+        int _response;          //used in decision making
         string gameOver = "Game Over!";
 
 
@@ -190,8 +190,8 @@ void story(int charSelect)
                 cout << "\nAs it sloshes back and forth, you figure you could use it in a time of need, but do not know what it is.";Sleep(750);
                 vialContents = "Mystery Liquid";Sleep(750);
                 cout << "\n+1 Vial of " << vialContents;
-                itemMap.emplace(vials,vialContents);
-                // cout << "\nInventory: " << itemMap.at(vials);    //testing map
+                inventory.emplace(vials,vialContents);
+                // cout << "\nInventory: " << inventory.at(vials);    //testing map
                 
                 
                 
@@ -254,7 +254,7 @@ void startGame()
     CharacterClass charClass;   //adventurer class 
 
     Sleep(750);
-    cout << "\ntype 'exit' to exit the game at any time\n\nWelcome to Dark Kingdom!";
+    cout << "\nType 'exit' to exit the game at any time\n\nWelcome to Evolem!";
     Sleep(750);
     cout << "\npress the enter key to play!" << endl;
     std::getline(std::cin,userplays);
@@ -273,9 +273,15 @@ void startGame()
     }
 
         Sleep(750);
-        cout << "\nWelcome to Lokasten " << charClass.name;
+        cout << "\nYou start your journey somewhere in Lokasten, a region once brimming with life";
         Sleep(750);
-        cout << "!\nHave your wits about you, this land is dangerous..." << endl;
+        cout << "\nand prosperity. The Mad Queen, Nadoa, has taken the throne after King Jontir's passing.";
+        Sleep(750);
+        cout << "\nNo one knows exactly what happened, but many believe it was her blind worship";
+        Sleep(750);
+        cout << "\nto what she calls the \"Great Overseer\" that plunged Lokasten into chaos.";
+        Sleep(750);
+        cout << "\nHave your wits about you, it is now a dangerous wasteland..." << endl;
         Sleep(750);
         cout << "Please choose a class to begin your journey."<<endl;Sleep(750);
         cout << "\n(1) Lucien the Knight - CURRENT TEST";

@@ -19,9 +19,13 @@ class CharacterClass{
         int strength = 0;  //buffness for knights
         int MP = 0;   //magic points for mages
         int arrows = 0; //arrows for archers
+        map<string,string> itemMap;
 
     public:
-        std::string name;    //name of adventurer
+        string name;    //name of adventurer
+        string vials;   //key for vials in map
+        string vialContents;    //value for vials in map
+
 
         void setAttribute(int classType) //set attribute based on class
         {
@@ -31,9 +35,9 @@ class CharacterClass{
                 name = "Lucien";
                 strength += 10;    //knight class gets 10 strength
                 cout << "\nYou chose Lucien the knight!";
-                Sleep(100);
+                Sleep(1999);
                 cout<<"\nKnights are the rock to any team, providing short range offense and defense.";
-                Sleep(100);
+                Sleep(1999);
                 cout<<"\nKnight classes get 10 points in strength.";
             }
             if(classType == 2)
@@ -41,9 +45,9 @@ class CharacterClass{
                 name = "Alagant";
                 MP += 10;    //mage class gets 10 mp
                 cout << "\nYou chose Alagant the Mage!";
-                Sleep(100);
+                Sleep(1999);
                 cout<<"\nMages help level the battle field with medium ranged magic and healing.";
-                Sleep(100);
+                Sleep(1999);
                 cout<<"\nMage classes get 10 points in magic points.";
             }
             if(classType == 3)
@@ -51,9 +55,9 @@ class CharacterClass{
                 name = "Reeva";
                 arrows += 10;    //archer class gets 10 arrows
                 cout << "\nYou chose Reeva the Archer!";
-                Sleep(100);
+                Sleep(1999);
                 cout<<"\nArchers provide support to a team with medium to long range attacks.";
-                Sleep(100);
+                Sleep(1999);
                 cout<<"\nArcher classes begin with 10 arrows.";
             }
         }
@@ -65,7 +69,7 @@ class CharacterClass{
             {
                 if( (health += amount) > 10)    //attributes will cap at 10
                 {
-                    cout << "cannot gain any more HP!" << std::endl;
+                    cout << "cannot gain any more HP!" << endl;
                 }else if((health += amount) <= 10)
                 {
                     health += amount;
@@ -74,7 +78,7 @@ class CharacterClass{
             {
                 if( (strength += amount) > 10)
                 {
-                    cout << "cannot gain any more VR!" << std::endl;
+                    cout << "cannot gain any more VR!" << endl;
                 }else if((strength += amount) <= 10)
                 {
                     strength += amount;
@@ -83,7 +87,7 @@ class CharacterClass{
             {
                 if( (MP += amount) > 10)
                 {
-                    cout << "cannot gain any more MP!" << std::endl;
+                    cout << "cannot gain any more MP!" << endl;
                 }else if((MP += amount) <= 10)
                 {
                     MP += amount;
@@ -92,7 +96,7 @@ class CharacterClass{
             {
                 if( (arrows += amount) > 10)
                 {
-                    cout << "cannot gain any more arrows!" << std::endl;
+                    cout << "cannot gain any more arrows!" << endl;
                 }else if((arrows += amount) <= 10)
                 {
                     arrows += amount;
@@ -108,30 +112,30 @@ class CharacterClass{
                 if( (health -= amount) <= 0)
                 {
                     health -= amount;
-                    cout << "you have perished!" << std::endl;
+                    cout << "you have perished!" << endl;
                 }
                 else
                 {
                     health -= amount;
-                    cout << "You have taken " << amount << " points of damage!"<<std::endl;
+                    cout << "You have taken " << amount << " points of damage!"<<endl;
                 }
             }else if(attr == "strength")
             {
                 if( (strength -= amount) <= 0)
                 {
-                    cout << "you are defenseless!" << std::endl;
+                    cout << "you are defenseless!" << endl;
                 }
             }else if(attr == "MP")
             {
                 if( (MP -= amount) <= 0)
                 {
-                    cout << "you have no magic points left!" << std::endl;
+                    cout << "you have no magic points left!" << endl;
                 }
             } else if(attr == "arrows")
             {
                 if( (arrows -= amount) <= 0)
                 {
-                    cout << "you have no arrows left!" << std::endl;
+                    cout << "you have no arrows left!" << endl;
                 }
             }
         };
@@ -146,84 +150,96 @@ void story(int charSelect)
     {
         case(1):    //Lucien introduction
         cout << "\n\nYou wake up in a dark and damp place, lying in freezing cold mud, being somewhat covered in it.";
-        Sleep(100);
+        Sleep(1999);
         cout << "\nThe right side of your temple is throbbing in agonizing pain.";
-        Sleep(100);
+        Sleep(1999);
         cout << "\nWhile you hold it with one hand, you use the other to prop yourself up.";
-        Sleep(100);
+        Sleep(1999);
         cout << "\nYou realize you are in some sort of tunnel.";
-        Sleep(100);
+        Sleep(1999);
         cout << "\nGetting back on your feet you notice a faint light ahead and ponder if it is worth checking.";
-        Sleep(100);
+        Sleep(1999);
         
-        cout << "\nWill you move towards the light?\n1. Yes\n2. No\n";
+        cout << "\n\nWill you move towards the light?\n(1) Yes\n(2) No\n";
 
                                     //-------------------------CURRENT ISSUE--------------------------//
-        char userResponse;
+        int userResponse;
         while(cin >> userResponse){
-        if(userResponse != '1' && userResponse != '2')
+        if(userResponse != 1 && userResponse != 2)
             cout << "Please select yes or no"<<endl;
         else
         break;
         }
-        enum decision{yes,no};
+        enum decision{yes=1,no=2};
         
         decision myResponse;
         myResponse = (decision)userResponse;
 
-        switch(userResponse)
+        cin.get();
+        switch(myResponse)
         {
             //case for yes response
-            case(0):
+            case(yes):
             {
-            Sleep(100);
-            cout << "\nYou get yourself up out of the mud and begin moving toward the light.";
-            cout << "\nStill holding your head, you trudge along a muddy path and feel for any wounds on your body.";
+                Sleep(1999);
+                cout << "\nYou get yourself up out of the mud and begin moving toward the light.";Sleep(1999);
+                cout << "\nStill holding your head, you trudge along a muddy path while feeling for any wounds on your body.";Sleep(1999);
+                cout << "\nYou feel along your waist and notice a vial. You grab it and shake it.";Sleep(1999);
+                cout << "\nAs it sloshes back and forth, you figure you could use it in a time of need, but do not know what it is.";Sleep(1999);
+                vialContents = "Mystery Liquid";Sleep(1999);
+                cout << "\n+1 Vial of " << vialContents;
+                itemMap.emplace(vials,vialContents);
+                // cout << "\nInventory: " << itemMap.at(vials);    //testing map
+                
+                
+                
                 break;
             }
             //case for no response1
-            case(1):
+            case(no):
             {
-                cout << "You turn around and wander in the dark for what feels like ages.";
-                cout << "\nSuddenly you are met with a unidentifiable yet very angry creature.";
-                cout << "\nIt grabs you by the face and sucks the soul out of your body!";
-                Sleep(100);
-                cout << "\nGame Over!" << endl;
+                cout << "\nYou turn around and wander in the dark for what feels like ages.";Sleep(1999);
+                cout << "\nSuddenly you are met with a unidentifiable yet very angry creature.";Sleep(1999);
+                cout << "\nWould you like to challenge this creature or run away?";Sleep(1999);
+                // cout << "\nGame Over!" << endl;  //game over ending
                  
                 break;
             }
             
             default:
-                return;
+                break;
         }
     }
 }
 
 };
 
-int startGame()
+void startGame()
 {
     std::string userplays;   //user will be prompted to start game
 
     //let's start simple with basic intro to the game
     //and prompting the user to play
-    Sleep(100);
-    cout << "\ntype 'exit' to exit the game at any time\n\nWelcome to Dark Kingdom!";
-    Sleep(100);
-    cout << "\npress the enter key to play!\n" << std::endl;
-    std::getline(std::cin,userplays);
 
     int _class; //user chooses class at beginning of game
     CharacterClass charClass;   //adventurer class 
-        Sleep(100);
-        cout << "\n\nWelcome to Lokasten, " << charClass.name;
-        Sleep(100);
-        cout << "!\nHave your wits about you, this land is dangerous..." << endl;
-        Sleep(100);
+
+    Sleep(1999);
+    cout << "\ntype 'exit' to exit the game at any time\n\nWelcome to Dark Kingdom!";
+    Sleep(1999);
+    cout << "\npress the enter key to play!" << endl;
+    std::getline(std::cin,userplays);
     while(userplays == "")//user hits enter key
     {
-        cout << "Greetings adventurer! Please choose a class to begin your journey."<<std::endl;
-        cout << "(1) Lucien the Knight - CURRENT RUNNING\n(2) Alagant the Mage\n(3) Reeva the Archer" << std::endl;
+        Sleep(1999);
+        cout << "\n\nWelcome to Lokasten " << charClass.name;
+        Sleep(1999);
+        cout << "!\nHave your wits about you, this land is dangerous..." << endl;
+        Sleep(1999);
+        cout << "Please choose a class to begin your journey."<<endl;Sleep(1999);
+        cout << "(1) Lucien the Knight - CURRENT TEST\n(2) Alagant the Mage\n(3) Reeva the Archer" << endl;
+        break;
+    }
         std::cin >> _class;
         switch (_class)
         {
@@ -248,13 +264,11 @@ int startGame()
         default:
             break;
         }
-    return -1;  //finish game
-    }
 }
 
 int main()
 {
     //game driver
     startGame();
-    return 0;
+    return 0;//finish game
 }

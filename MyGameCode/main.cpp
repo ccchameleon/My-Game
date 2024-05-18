@@ -7,6 +7,10 @@ Lokasten and fight the risen dead and other devious enemies to reach the evil ki
 and cleanse the land of darkness.
 */
 #include <iostream>
+#include <string>
+#include <thread>
+#include <chrono>
+#include <hash_map>
 
 using namespace std;
 
@@ -93,6 +97,8 @@ class CharacterClass{
 
         //damage attribute
         void dmgAmount(string attr, int amount)
+
+
         {       
             if(attr == "health")
             {
@@ -104,7 +110,7 @@ class CharacterClass{
                 else
                 {
                     health -= amount;
-                    cout << "You have taken " << amount << " points of damage!"<<endl;
+                    cout << "You have taken " << amount << " damage!"<<endl;
                 }
             }else if(attr == "strength")
             {
@@ -127,20 +133,55 @@ class CharacterClass{
             }
         };
 
+    void classIntro(int classType){
+        switch (classType)
+        {
+            case 1:
+            cout << "\n\n\n\n\n"
+             "\"Awaken, Lucien.\"\nYou feel the sound of hundreds of voices wake you to life.\n Beginning to move, you slowly open your eyes and survey the area surrounding your body with your muddled hands.\n You are completely soaked save for your face. Looking around with newfound life, you notice you are partially floating in a dim land.\n You struggle off your back using your hands and feet to prop yourself up.\n Realizing that you are in a marshland, you wonder \"How did I end up here?\"" 
+             << "\n You brush off the thought as you gain your balance.\n\nYou look to just beyond your shoulder and see dead bodies littered in the swampy waters.\n Just in front of you, you see a gleaming light shining off what looks like the hilt of a blade.\n Will you take it?"<< endl;
+             takeAction(1);
+             cout <<"\n\n\n\n\n";
+             break;
+             default:
+                cout << "\nNot a valid selection\n" << endl;
+                // startGame();
+        } 
+    };
+
+    void takeAction(int classType){
+        string _userinput;
+        switch (classType){
+            case 1:
+            cout <<"\t1  Yes"<<"\n\t2  No"<<endl;
+            getline(cin,_userinput);
+            while(_userinput != ""){
+                if(_userinput == "1"){
+                    cout << "You grab the blade." << endl;
+                }
+            default:
+            return;
+            }
+        }
+    };
+
 };
+
+
+
 
 void startGame()
 {
-    string userplays;   //user will be prompted to start game
+    string user_play;   //user will be prompted to start game
 
     //let's start simple with basic intro to the game
     //and prompting the user to play
-    cout << "\ntype 'exit' to exit the game at any time\n\nWelcome to Dark Kingdom!\npress the enter key to play!\n" << endl;
-    getline(cin,userplays);
+    cout << "\ntype 'exit' to exit the game at any time\n\nWelcome to Dark Kingdom!\nPress the enter key to play!\n" << endl;
+    getline(cin,user_play);
 
     int _class; //user chooses class at beginning of game
     CharacterClass charClass;   //adventurer class 
-    while(userplays == "")//user hits enter key
+    if(user_play == "")//user hits enter key
     {
         cout << "Greetings adventurer! Please choose a class to begin your journey."<<endl;
         cout << "(1) Lucien the Knight\n(2) Alagant the Mage\n(3) Reeva the Archer" << endl;
@@ -150,11 +191,13 @@ void startGame()
             case (1):
             {
                 charClass.setAttribute(1);  //knight class
+                charClass.classIntro(1);
                 break;
             }
             case(2):
             {
                 charClass.setAttribute(2);  //mage class
+                charClass.classIntro(2);
                 break;
             }
             case(3):
@@ -162,9 +205,13 @@ void startGame()
                 charClass.setAttribute(3);  //archer class
                 break;
             }
+            default:
+            startGame();
         }
-        cout << "\n\nWelcome to Lokasten, " << charClass.name << "!\nHave your wits about you, this land is dangerous..." << endl;
-        break;
+        // classIntro;
+        return;
+    }else{
+        startGame();
     }
 }
 
